@@ -56,6 +56,14 @@ client.sell!(BigDecimal('1'), BigDecimal('101'))
 client.cancel 1234
 ```
 
+## Examples
+
+You can run any of the examples in the `example` dir by just executing the script (except `example/example.rb`, which is the base example class).  For instance, to see your balance, do the following:
+
+```ruby
+ruby example/balance.rb
+```
+
 ## Contributing
 
 1. Fork it

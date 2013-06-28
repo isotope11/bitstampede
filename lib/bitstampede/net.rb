@@ -17,7 +17,7 @@ module Bitstampede
     end
 
     def post(endpoint, options={})
-      HTTParty.post(url_for(endpoint), options.merge(auth_options)).to_s
+      map_response(raw_post(endpoint, options))
     end
 
     private
@@ -31,9 +31,20 @@ module Bitstampede
 
     def auth_options
       {
-        key: key,
-        secret: secret
+        user: key,
+        password: secret
       }
+    end
+
+    # For some crazy reason, bitstamp is returning ruby hash strings rather than
+    # JSON objects right now ಠ_ಠ  I'm just going to gsub '=>' to ':' to 'solve'
+    # it for now.  Not thrilled with this.
+    def map_response(wish_this_were_reliably_json)
+      wish_this_were_reliably_json.gsub('=>', ':')
+    end
+
+    def raw_post(endpoint, options)
+      HTTParty.post(url_for(endpoint), body: options.merge(auth_options)).to_s
     end
   end
 end
