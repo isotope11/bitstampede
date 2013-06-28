@@ -1,5 +1,5 @@
 # Bitstampede
-[![Build Status](https://travis-ci.org/isotope11/bitstampede.png?branch=master)](https://travis-ci.org/isotope11/bitstampede) [![Coverage Status](https://coveralls.io/repos/isotope11/bitstampede/badge.png?branch=master)](https://coveralls.io/r/isotope11/bitstampede?branch=master)
+[![Build Status](https://travis-ci.org/isotope11/bitstampede.png?branch=master)](https://travis-ci.org/isotope11/bitstampede) [![Coverage Status](https://coveralls.io/repos/isotope11/bitstampede/badge.png?branch=master)](https://coveralls.io/r/isotope11/bitstampede?branch=master) [![Code Climate](https://codeclimate.com/github/isotope11/bitstampede.png)](https://codeclimate.com/github/isotope11/bitstampede)
 
 
 Bitstampede is a gem for accessing the Bitstamp API
