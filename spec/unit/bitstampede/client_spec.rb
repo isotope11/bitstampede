@@ -59,7 +59,7 @@ describe Bitstampede::Client do
     before do
       net.stub(:post).and_return(api_buy_response)
       mapper.stub(:map_order).and_return(order_object)
-      subject.buy!(BigDecimal('1'), BigDecimal('100'))
+      subject.buy!(BigDecimal('100'), BigDecimal('1'))
     end
 
     it 'submits a buy order to the API' do
@@ -78,7 +78,7 @@ describe Bitstampede::Client do
     before do
       net.stub(:post).and_return(api_sell_response)
       mapper.stub(:map_order).and_return(order_object)
-      subject.sell!(BigDecimal('1'), BigDecimal('100'))
+      subject.sell!(BigDecimal('100'), BigDecimal('1'))
     end
 
     it 'submits a sell order to the API' do
