@@ -15,4 +15,19 @@ describe Bitstampede::Entities::Order do
   it "has an id" do
     expect(subject.id).to eq(1)
   end
+
+  describe "type" do
+    it "maps 0 to :buy" do
+      expect(subject.type).to eq(:buy)
+    end
+
+    it "maps 1 to :sell" do
+      order = described_class.new(order_hash.merge({"type" => 1}))
+      expect(order.type).to eq(:sell)
+    end
+
+    it "raises InvalidTypeError for other values" do
+      expect { described_class.new(order_hash.merge({"type" => 2})) }.to raise_error(Bitstampede::Entities::Order::InvalidTypeError)
+    end
+  end
 end

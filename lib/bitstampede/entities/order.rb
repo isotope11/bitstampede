@@ -3,6 +3,8 @@ require_relative './base'
 module Bitstampede
   module Entities
     class Order < Base
+      class InvalidTypeError < StandardError; end
+
       def self.map_type
         ->(val) do
           case val.to_s
@@ -11,7 +13,7 @@ module Bitstampede
           when '1'
             :sell
           else
-            raise 'No such type'
+            raise InvalidTypeError
           end
         end
       end
