@@ -15,11 +15,11 @@ module Bitstampede
 
     private
     def net
-      @net ||= Object.new # Do this
+      @net ||= Net.new(self)
     end
 
     def mapper
-      @mapper ||= Object.new # Do this
+      @mapper ||= Mapper.new
     end
   end
 end
