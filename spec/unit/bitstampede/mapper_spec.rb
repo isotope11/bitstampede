@@ -34,4 +34,11 @@ describe Bitstampede::Mapper do
       expect(Entities::Order).to have_received(:new).with(json_parse(json_array)[0])
     end
   end
+
+  describe '#map_cancel' do
+    it "maps a cancel API response to a boolean" do
+      expect(subject.map_cancel('"true"')).to eq(true)
+      expect(subject.map_cancel('"false"')).to eq(false)
+    end
+  end
 end

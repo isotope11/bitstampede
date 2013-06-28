@@ -26,6 +26,10 @@ module Bitstampede
       trade!("sell", price, amount)
     end
 
+    def cancel(id)
+      mapper.map_cancel(net.post("cancel_order", { id: id.to_s }))
+    end
+
     private
     def net
       @net ||= Net.new(self)

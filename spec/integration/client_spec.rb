@@ -79,4 +79,15 @@ describe "Integrating a client" do
     sell = subject.sell!(BigDecimal('1'), BigDecimal('100'))
     expect(sell.type).to eq(:sell)
   end
+
+  it "handles #cancel" do
+    example_cancel_response = <<-JSON
+      "true"
+    JSON
+
+    FakeWeb.register_uri(:post, "https://www.bitstamp.net/api/cancel_order/", body: example_cancel_response)
+
+    cancel = subject.cancel(12345)
+    expect(cancel).to eq(true)
+  end
 end

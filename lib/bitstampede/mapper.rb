@@ -18,6 +18,10 @@ module Bitstampede
       Entities::Order.new(parsed(order))
     end
 
+    def map_cancel(result)
+      parsed(result) == 'true'
+    end
+
     private
     # Allow passing either a String or anything else in.  If it's not a string,
     # we assume we've already parsed it and just give it back to you.  This

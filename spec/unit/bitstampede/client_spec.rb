@@ -89,4 +89,22 @@ describe Bitstampede::Client do
       expect(mapper).to have_received(:map_order).with(api_sell_response)
     end
   end
+
+  describe 'cancel' do
+    let(:api_cancel_response){ double }
+
+    before do
+      net.stub(:post).and_return(api_cancel_response)
+      mapper.stub(:map_cancel).and_return(true)
+      subject.cancel(1234)
+    end
+
+    it 'submits a cancel order to the API' do
+      expect(net).to have_received(:post).with('cancel_order', { id: '1234' })
+    end
+
+    it 'maps the API response to a boolean' do
+      expect(mapper).to have_received(:map_cancel).with(api_cancel_response)
+    end
+  end
 end
