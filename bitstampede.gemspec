@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Bitstampede::VERSION
   spec.authors       = ["Josh Adams"]
   spec.email         = ["josh@isotope11.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{This is a client library for the Bitstamp API that supports instantiating multiple clients in the same process.}
+  spec.summary       = %q{Fantastic bitstamp library.}
+  spec.homepage      = "http://github.com/isotope11/bitstampede"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
