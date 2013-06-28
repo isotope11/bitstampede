@@ -1,6 +1,6 @@
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
-describe Bitstampede::Balance do
+describe Bitstampede::Entities::Balance do
   let(:balance_hash){
     {
       "usd_balance" => "111.12",

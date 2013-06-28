@@ -13,6 +13,10 @@ module Bitstampede
       mapper.map_balance(net.post("balance"))
     end
 
+    def orders
+      mapper.map_orders(net.post("open_orders"))
+    end
+
     private
     def net
       @net ||= Net.new(self)

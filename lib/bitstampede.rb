@@ -4,7 +4,7 @@ require 'multi_json'
 require 'yajl'
 
 module Bitstampede
-  module JSON
+  module Helpers
     def self.json_parse(string)
       MultiJson.load(string)
     end
