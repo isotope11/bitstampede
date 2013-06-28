@@ -70,4 +70,23 @@ describe Bitstampede::Client do
       expect(mapper).to have_received(:map_order).with(api_buy_response)
     end
   end
+
+  describe 'sell!' do
+    let(:api_sell_response){ double }
+    let(:order_object){ double }
+
+    before do
+      net.stub(:post).and_return(api_sell_response)
+      mapper.stub(:map_order).and_return(order_object)
+      subject.sell!(BigDecimal('1'), BigDecimal('100'))
+    end
+
+    it 'submits a sell order to the API' do
+      expect(net).to have_received(:post).with('sell', { amount: '100.0', price: '1.0' })
+    end
+
+    it 'maps the API response to an Order object' do
+      expect(mapper).to have_received(:map_order).with(api_sell_response)
+    end
+  end
 end

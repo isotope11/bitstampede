@@ -19,7 +19,11 @@ module Bitstampede
     end
 
     def buy!(price, amount)
-      mapper.map_order(net.post("buy", { price: price.to_digits, amount: amount.to_digits }))
+      trade!("buy", price, amount)
+    end
+
+    def sell!(price, amount)
+      trade!("sell", price, amount)
     end
 
     private
@@ -29,6 +33,10 @@ module Bitstampede
 
     def mapper
       @mapper ||= Mapper.new
+    end
+
+    def trade!(type, price, amount)
+      mapper.map_order(net.post(type, { price: price.to_digits, amount: amount.to_digits }))
     end
   end
 end
