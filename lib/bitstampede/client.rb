@@ -40,7 +40,11 @@ module Bitstampede
     end
 
     def trade!(type, amount, price)
-      mapper.map_order(net.post(type, { price: price.to_digits, amount: amount.to_digits }))
+      begin
+        mapper.map_order(net.post(type, { price: price.to_digits, amount: amount.to_digits }))
+      rescue ::StandardError => e
+        raise Bitstampede::StandardError.new(e.message)
+      end
     end
   end
 end

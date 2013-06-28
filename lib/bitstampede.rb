@@ -4,6 +4,8 @@ require 'multi_json'
 require 'yajl'
 
 module Bitstampede
+  class StandardError < ::StandardError; end
+
   module Helpers
     def self.json_parse(string)
       MultiJson.load(string)
