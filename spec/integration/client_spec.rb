@@ -45,4 +45,21 @@ describe "Integrating a client" do
     orders = subject.orders
     expect(orders[0].type).to eq(:buy)
   end
+
+  it "handles #buy!" do
+    example_buy_response = <<-JSON
+      {
+        "id": "1",
+        "datetime": "1234567",
+        "type": 0,
+        "price": "12.34",
+        "amount": "100"
+      }
+    JSON
+
+    FakeWeb.register_uri(:post, "https://www.bitstamp.net/api/buy/", body: example_buy_response)
+
+    buy = subject.buy!(BigDecimal('1'), BigDecimal('100'))
+    expect(buy.type).to eq(:buy)
+  end
 end

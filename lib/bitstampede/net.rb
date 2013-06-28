@@ -16,8 +16,8 @@ module Bitstampede
       client.key
     end
 
-    def post(endpoint)
-      HTTParty.post(url_for(endpoint), key: key, secret: secret).to_s
+    def post(endpoint, options={})
+      HTTParty.post(url_for(endpoint), options.merge(auth_options)).to_s
     end
 
     private
@@ -27,6 +27,13 @@ module Bitstampede
 
     def base_url
       'https://www.bitstamp.net/api/'
+    end
+
+    def auth_options
+      {
+        key: key,
+        secret: secret
+      }
     end
   end
 end

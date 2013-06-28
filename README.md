@@ -39,11 +39,11 @@ client.secret = 'YOUR_PASSWORD'
 
 # Fetch your balance
 client.balance
-# => What does this look like?
+# => #<Bitstampede::Entities::Balance:0x0000000259f338 @usd_balance=#<BigDecimal:259e898,'0.0',9(9)>, @btc_balance=#<BigDecimal:2726698,'0.0',9(9)>, @usd_reserved=#<BigDecimal:2726328,'0.0',9(9)>, @btc_reserved=#<BigDecimal:2725fb8,'0.0',9(9)>, @usd_available=#<BigDecimal:2725c48,'0.0',9(9)>, @btc_available=#<BigDecimal:27258b0,'0.0',9(9)>, @fee=#<BigDecimal:2725540,'0.0',9(9)>>
 
 client.orders
 #=> [
-  { lol: 'not yet' }
+  #<Bitstampede::Entities::Order:0x000000027302d8 @id=0, @datetime=0, @type=:buy, @price=#<BigDecimal:272f428,'0.0',9(9)>, @amount=#<BigDecimal:272f130,'0.0',9(9)>>
 ]
 
 # Place a limit order to buy one bitcoin for $100.00 USD
