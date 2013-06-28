@@ -22,17 +22,11 @@ describe Bitstampede::Net do
   end
 
   describe '#post' do
-    describe 'balance' do
+    describe 'any_endpoint' do
       let(:example_balance) do
         <<-JSON
           {
-            "usd_balance": "12.34",
-            "btc_balance": "23.45",
-            "usd_reserved": "1.11",
-            "btc_reserved": "2.22",
-            "usd_available": "11.23",
-            "btc_available": "21.23",
-            "fee": "0.5"
+            "foo": "bar"
           }
         JSON
       end
@@ -41,7 +35,7 @@ describe Bitstampede::Net do
         FakeWeb.register_uri(:post, "https://www.bitstamp.net/api/balance/", body: example_balance)
       end
 
-      it "queries the api appropriately for the balance" do
+      it "queries the appropriate endpoint and returns its body as a string" do
         expect(json_parse(subject.post('balance'))).to eq(json_parse(example_balance))
       end
     end
