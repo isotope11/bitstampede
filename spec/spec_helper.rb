@@ -7,7 +7,7 @@ require 'bundler'
 Bundler.setup
 
 require 'fakeweb'
-FakeWeb.allow_net_connect = false
+FakeWeb.allow_net_connect = %r[coveralls\.io] # Only allow the coveralls api call through
 
 require 'multi_json'
 def json_parse(string)
