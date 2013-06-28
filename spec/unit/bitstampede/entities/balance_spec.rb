@@ -41,4 +41,8 @@ describe Bitstampede::Entities::Balance do
   it "has a fee" do
     expect(subject.fee).to eq(BigDecimal('1.11'))
   end
+
+  it "can be inspected" do
+    expect { subject.inspect }.to_not raise_error
+  end
 end
