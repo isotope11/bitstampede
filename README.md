@@ -1,4 +1,5 @@
 # Bitstampede
+[![Build Status](https://travis-ci.org/isotope11/bitstampede.png?branch=master)](https://travis-ci.org/isotope11/bitstampede)
 
 Bitstampede is a gem for accessing the Bitstamp API
 
