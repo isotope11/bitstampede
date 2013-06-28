@@ -20,7 +20,7 @@ Or install it yourself as:
 
 First, look at this picture:
 
-![./doc/legitimate_concern.png](Legitimate Concern)
+![Legitimate Concern](./doc/legitimate_concern.png)
 
 Second, stop writing api clients that are configured with class ivars ಠ_ಠ
 
