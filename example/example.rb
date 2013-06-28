@@ -7,7 +7,7 @@ class Example
     client = Bitstampede::Client.new
     client.key = key
     client.secret = secret
-    output block.call(client).inspect
+    output block.call(client)
   end
 
   private
@@ -43,6 +43,10 @@ class Example
   end
 
   def output(message)
-    STDOUT.puts message
+    if(message.is_a?(String))
+      STDOUT.puts message
+    else
+      STDOUT.puts message.inspect
+    end
   end
 end
