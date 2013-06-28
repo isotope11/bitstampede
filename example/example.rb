@@ -7,7 +7,7 @@ class Example
     client = Bitstampede::Client.new
     client.key = key
     client.secret = secret
-    output block.call(client)
+    output block.call(client).inspect
   end
 
   private

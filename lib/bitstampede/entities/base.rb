@@ -15,6 +15,15 @@ module Bitstampede
         end
       end
 
+      def inspect
+        inspect_string = "#<#{self.class}:#{self.object_id} "
+        self.class.keys.each do |key|
+          inspect_string << "#{key}: #{send(key).inspect} "
+        end
+        inspect_string << " >"
+        inspect_string
+      end
+
       def self.map_int
         ->(val) { val.to_i }
       end
