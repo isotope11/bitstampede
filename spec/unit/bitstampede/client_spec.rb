@@ -117,5 +117,10 @@ describe Bitstampede::Client do
     it 'maps the API response to a boolean' do
       expect(mapper).to have_received(:map_cancel).with(api_cancel_response)
     end
+
+    it 'wraps exceptions in its own class' do
+      net.stub(:post).and_raise(StandardError)
+      expect{ subject.cancel(123) }.to raise_error(Bitstampede::StandardError)
+    end
   end
 end

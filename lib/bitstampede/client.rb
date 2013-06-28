@@ -27,7 +27,9 @@ module Bitstampede
     end
 
     def cancel(id)
-      mapper.map_cancel(net.post("cancel_order", { id: id.to_s }))
+      wrapping_standard_error do
+        mapper.map_cancel(net.post("cancel_order", { id: id.to_s }))
+      end
     end
 
     private
@@ -40,8 +42,14 @@ module Bitstampede
     end
 
     def trade!(type, amount, price)
-      begin
+      wrapping_standard_error do
         mapper.map_order(net.post(type, { price: price.to_digits, amount: amount.to_digits }))
+      end
+    end
+
+    def wrapping_standard_error &block
+      begin
+        yield
       rescue ::StandardError => e
         raise Bitstampede::StandardError.new(e.message)
       end
