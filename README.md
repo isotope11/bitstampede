@@ -18,6 +18,12 @@ Or install it yourself as:
 
 ## Usage
 
+First, look at this picture:
+
+![./doc/legitimate_concern.png](Legitimate Concern)
+
+Second, stop writing api clients that are configured with class ivars ಠ_ಠ
+
 TODO: Write usage instructions here
 
 ## Contributing
