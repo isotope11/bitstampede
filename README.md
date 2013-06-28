@@ -24,7 +24,35 @@ First, look at this picture:
 
 Second, stop writing api clients that are configured with class ivars ಠ_ಠ
 
-TODO: Write usage instructions here
+Third, this stuff:
+
+## Actual Usage Without Silly Pictures
+
+```ruby
+client = Bitstampede::Client.new
+
+# I am sad for the following, but such is Bitstamp at present :-\
+client.key = 'YOUR_USER_ID'
+client.secret = 'YOUR_PASSWORD'
+
+# Fetch your balance
+client.balance
+# => What does this look like?
+
+client.orders
+#=> [
+  { lol: 'not yet' }
+]
+
+# Place a limit order to buy one bitcoin for $100.00 USD
+client.buy!(BigDecimal('1'), BigDecimal('100'))
+
+# Place a limit order to sell one bitcoin for $101.00 USD
+client.sell!(BigDecimal('1'), BigDecimal('101'))
+
+# Cancel order #1234
+client.cancel 1234
+```
 
 ## Contributing
 

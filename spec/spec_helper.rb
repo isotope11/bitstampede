@@ -7,3 +7,5 @@ require 'rspec'
 require 'rspec/autorun'
 require 'bundler'
 Bundler.setup
+
+require_relative '../lib/bitstampede'
