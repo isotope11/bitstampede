@@ -1,3 +1,6 @@
+require_relative 'net'
+require_relative 'mapper'
+
 module Bitstampede
   class Client
     attr_accessor :key
