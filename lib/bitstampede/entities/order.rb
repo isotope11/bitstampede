@@ -21,7 +21,7 @@ module Bitstampede
       def self.mappings
         {
           id: map_int,
-          datetime: map_int,
+          datetime: map_time,
           type: map_type,
           price: map_decimal,
           amount: map_decimal

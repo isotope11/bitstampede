@@ -24,6 +24,10 @@ module Bitstampede
         inspect_string
       end
 
+      def self.map_time
+        ->(val) { Time.parse(val) }
+      end
+
       def self.map_int
         ->(val) { val.to_i }
       end
