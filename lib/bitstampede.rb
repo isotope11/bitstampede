@@ -1,7 +1,7 @@
 require_relative './bitstampede/version'
 require_relative './bitstampede/client'
 require 'multi_json'
-require 'oj'
+require 'json'
 
 module Bitstampede
   class StandardError < ::StandardError; end
