@@ -9,10 +9,9 @@ module Bitstampede
         self.mappings.keys
       end
 
-      def initialize(balance_hash)
-        self.class.keys.each do |key|
-          instance_variable_set("@#{key}", self.class.mappings[key].call(balance_hash[key.to_s].to_s))
-        end
+      def initialize(hash)
+        check_for_errors(hash)
+        map_instance_variables(hash)
       end
 
       def inspect
@@ -34,6 +33,19 @@ module Bitstampede
 
       def self.map_decimal
         ->(val) { BigDecimal(val) }
+      end
+
+      private
+      def map_instance_variables(hash)
+        self.class.keys.each do |key|
+          instance_variable_set("@#{key}", self.class.mappings[key].call(hash[key.to_s].to_s))
+        end
+      end
+
+      def check_for_errors(hash)
+        if hash.keys.include?("error")
+          raise Bitstampede::StandardError.new(hash["error"]["__all__"].join(".  "))
+        end
       end
     end
   end

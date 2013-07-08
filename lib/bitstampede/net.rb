@@ -44,7 +44,7 @@ module Bitstampede
     end
 
     def raw_post(endpoint, options)
-      HTTParty.post(url_for(endpoint), body: options.merge(auth_options)).to_s
+      HTTParty.post(url_for(endpoint), body: options.merge(auth_options)).to_s.tap {|r| STDOUT.puts r}
     end
   end
 end

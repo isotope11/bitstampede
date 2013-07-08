@@ -46,21 +46,33 @@ describe "Integrating a client" do
     expect(orders[0].type).to eq(:buy)
   end
 
-  it "handles #buy!" do
-    example_buy_response = <<-JSON
-      {
-        "id": "1",
-        "datetime": "1234567",
-        "type": 0,
-        "price": "12.34",
-        "amount": "100"
-      }
-    JSON
+  context "handling #buy!" do
+    it "succeeds properly" do
+      example_buy_response = <<-JSON
+        {
+          "id": "1",
+          "datetime": "1234567",
+          "type": 0,
+          "price": "12.34",
+          "amount": "100"
+        }
+      JSON
 
-    FakeWeb.register_uri(:post, "https://www.bitstamp.net/api/buy/", body: example_buy_response)
+      FakeWeb.register_uri(:post, "https://www.bitstamp.net/api/buy/", body: example_buy_response)
 
-    buy = subject.buy!(BigDecimal('1'), BigDecimal('100'))
-    expect(buy.type).to eq(:buy)
+      buy = subject.buy!(BigDecimal('1'), BigDecimal('100'))
+      expect(buy.type).to eq(:buy)
+    end
+
+    it "fails properly" do
+      example_buy_response = <<-JSON
+        {"error"=>{"__all__"=>["Minimum order size is $1"]}}
+      JSON
+
+      FakeWeb.register_uri(:post, "https://www.bitstamp.net/api/buy/", body: example_buy_response)
+
+      expect{ subject.buy!(BigDecimal('1'), BigDecimal('100')) }.to raise_error(Bitstampede::StandardError, "Minimum order size is $1")
+    end
   end
 
   it "handles #sell!" do
