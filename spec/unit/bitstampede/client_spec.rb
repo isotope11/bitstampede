@@ -10,6 +10,19 @@ describe Bitstampede::Client do
     subject.secret = '2'
   end
 
+  describe '#initialize' do
+    it 'does not require any initial parameters' do
+      expect { described_class.new }.not_to raise_error
+    end
+
+    it 'allows specifying key/secret on initialize' do
+      client = described_class.new('KEY', 'SECRET')
+
+      expect(client.key).to eql('KEY')
+      expect(client.secret).to eql('SECRET')
+    end
+  end
+
   describe '#balance' do
     let(:api_balance_response){ double }
     let(:balance_object){ double }
