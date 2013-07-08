@@ -10,15 +10,15 @@ describe Bitstampede::Entities::Order do
       "amount" => "10"
     }
   }
-  subject{ described_class.new(order_hash) }
+  subject(:order) { described_class.new(order_hash) }
 
   it "has an id" do
-    expect(subject.id).to eq(1)
+    expect(order.id).to eq(1)
   end
 
   describe "type" do
     it "maps 0 to :buy" do
-      expect(subject.type).to eq(:buy)
+      expect(order.type).to eq(:buy)
     end
 
     it "maps 1 to :sell" do
