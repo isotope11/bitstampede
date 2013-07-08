@@ -12,37 +12,37 @@ describe Bitstampede::Entities::Balance do
       "fee" => "1.11"
     }
   }
-  subject{ described_class.new(balance_hash) }
+  subject(:balance) { described_class.new(balance_hash) }
 
   it "has a usd_balance" do
-    expect(subject.usd_balance).to eq(BigDecimal('111.12'))
+    expect(balance.usd_balance).to eq(BigDecimal('111.12'))
   end
 
   it "has a btc_balance" do
-    expect(subject.btc_balance).to eq(BigDecimal('211.23'))
+    expect(balance.btc_balance).to eq(BigDecimal('211.23'))
   end
 
   it "has a usd_reserved" do
-    expect(subject.usd_reserved).to eq(BigDecimal('1.20'))
+    expect(balance.usd_reserved).to eq(BigDecimal('1.20'))
   end
 
   it "has a btc_reserved" do
-    expect(subject.btc_reserved).to eq(BigDecimal('2.30'))
+    expect(balance.btc_reserved).to eq(BigDecimal('2.30'))
   end
 
   it "has a usd_available" do
-    expect(subject.usd_available).to eq(BigDecimal('5.50'))
+    expect(balance.usd_available).to eq(BigDecimal('5.50'))
   end
 
   it "has a btc_available" do
-    expect(subject.btc_available).to eq(BigDecimal('6.60'))
+    expect(balance.btc_available).to eq(BigDecimal('6.60'))
   end
 
   it "has a fee" do
-    expect(subject.fee).to eq(BigDecimal('1.11'))
+    expect(balance.fee).to eq(BigDecimal('1.11'))
   end
 
   it "can be inspected" do
-    expect { subject.inspect }.to_not raise_error
+    expect { balance.inspect }.to_not raise_error
   end
 end
