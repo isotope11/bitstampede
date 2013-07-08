@@ -37,6 +37,9 @@ client = Bitstampede::Client.new
 client.key = 'YOUR_USER_ID'
 client.secret = 'YOUR_PASSWORD'
 
+# Alternatively, you can configure the client on initialization with:
+client = Bitstampede::Client.new('YOUR_USER_ID', 'YOUR_PASSWORD')
+
 # Fetch your balance
 client.balance
 # => #<Bitstampede::Entities::Balance:0x0000000259f338 @usd_balance=#<BigDecimal:259e898,'0.0',9(9)>, @btc_balance=#<BigDecimal:2726698,'0.0',9(9)>, @usd_reserved=#<BigDecimal:2726328,'0.0',9(9)>, @btc_reserved=#<BigDecimal:2725fb8,'0.0',9(9)>, @usd_available=#<BigDecimal:2725c48,'0.0',9(9)>, @btc_available=#<BigDecimal:27258b0,'0.0',9(9)>, @fee=#<BigDecimal:2725540,'0.0',9(9)>>
@@ -75,3 +78,10 @@ ruby example/balance.rb
 ## License
 
 This software is licensed under [the MIT License.](./LICENSE.md)
+
+## Contributors
+
+These people have contributed to the gem.  Many thanks!:
+
+- Josh Adams
+- [Robert Jackson](https://github.com/rjackson)
