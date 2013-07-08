@@ -1,7 +1,7 @@
 require_relative '../../spec_helper'
 
 describe Bitstampede::Mapper do
-  subject { described_class.new }
+  subject(:mapper) { described_class.new }
   let(:json_object){ '{"foo": "bar"}' }
   let(:json_array){ '[{"foo": "bar"}]' }
 
@@ -13,12 +13,12 @@ describe Bitstampede::Mapper do
     end
 
     it "maps a balance API response into a Balance entity" do
-      subject.map_balance(json_object)
+      mapper.map_balance(json_object)
       expect(Entities::Balance).to have_received(:new).with(json_parse(json_object))
     end
 
     it "returns the mapped Balance entity" do
-      expect(subject.map_balance(json_object)).to eq(balance)
+      expect(mapper.map_balance(json_object)).to eq(balance)
     end
   end
 
@@ -30,15 +30,15 @@ describe Bitstampede::Mapper do
     end
 
     it "maps an open_orders API response into an array of Order entities" do
-      subject.map_orders(json_array)
+      mapper.map_orders(json_array)
       expect(Entities::Order).to have_received(:new).with(json_parse(json_array)[0])
     end
   end
 
   describe '#map_cancel' do
     it "maps a cancel API response to a boolean" do
-      expect(subject.map_cancel('"true"')).to eq(true)
-      expect(subject.map_cancel('"false"')).to eq(false)
+      expect(mapper.map_cancel('"true"')).to eq(true)
+      expect(mapper.map_cancel('"false"')).to eq(false)
     end
   end
 end
