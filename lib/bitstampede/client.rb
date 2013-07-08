@@ -7,7 +7,9 @@ module Bitstampede
     attr_accessor :key
     attr_accessor :secret
 
-    def initialize
+    def initialize(key = nil, secret = nil)
+      @key    = key
+      @secret = secret
     end
 
     def balance
