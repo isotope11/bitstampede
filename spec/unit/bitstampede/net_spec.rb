@@ -2,7 +2,7 @@ require_relative '../../spec_helper'
 
 describe Bitstampede::Net do
   let(:client){ double }
-  subject { described_class.new(client) }
+  subject(:net) { described_class.new(client) }
 
   before do
     client.stub(:secret).and_return(1)
@@ -10,15 +10,15 @@ describe Bitstampede::Net do
   end
 
   it 'gets instantiated with a client' do
-    expect(subject.client).to eq(client)
+    expect(net.client).to eq(client)
   end
 
   it 'defers to its client for secret' do
-    expect(subject.secret).to eq(1)
+    expect(net.secret).to eq(1)
   end
 
   it 'defers to its client for key' do
-    expect(subject.key).to eq(2)
+    expect(net.key).to eq(2)
   end
 
   describe '#post' do
@@ -36,7 +36,7 @@ describe Bitstampede::Net do
       end
 
       it "queries the appropriate endpoint and returns its body as a string" do
-        expect(json_parse(subject.post('balance'))).to eq(json_parse(example_balance))
+        expect(json_parse(net.post('balance'))).to eq(json_parse(example_balance))
       end
     end
   end

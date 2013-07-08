@@ -1,13 +1,13 @@
 require_relative '../../spec_helper'
 
 describe Bitstampede::Client do
-  subject { described_class.new }
-  let(:net){ subject.send(:net) }
-  let(:mapper){ subject.send(:mapper) }
+  subject(:client) { described_class.new }
+  let(:net){ client.send(:net) }
+  let(:mapper){ client.send(:mapper) }
 
   before do
-    subject.key = '1'
-    subject.secret = '2'
+    client.key = '1'
+    client.secret = '2'
   end
 
   describe '#balance' do
@@ -17,7 +17,7 @@ describe Bitstampede::Client do
     before do
       net.stub(:post).and_return(api_balance_response)
       mapper.stub(:map_balance).and_return(balance_object)
-      subject.balance
+      client.balance
     end
 
     it 'requests the balance from the API' do
@@ -29,7 +29,7 @@ describe Bitstampede::Client do
     end
 
     it 'returns the mapped object' do
-      expect(subject.balance).to eq(balance_object)
+      expect(client.balance).to eq(balance_object)
     end
   end
 
@@ -40,7 +40,7 @@ describe Bitstampede::Client do
     before do
       net.stub(:post).and_return(api_orders_response)
       mapper.stub(:map_orders).and_return([order_object])
-      subject.orders
+      client.orders
     end
 
     it 'requests open orders from the API' do
@@ -62,18 +62,18 @@ describe Bitstampede::Client do
     end
 
     it 'submits a buy order to the API' do
-      subject.buy!(BigDecimal('100'), BigDecimal('1'))
+      client.buy!(BigDecimal('100'), BigDecimal('1'))
       expect(net).to have_received(:post).with('buy', { amount: '100.0', price: '1.0' })
     end
 
     it 'maps the API response to an Order object' do
-      subject.buy!(BigDecimal('100'), BigDecimal('1'))
+      client.buy!(BigDecimal('100'), BigDecimal('1'))
       expect(mapper).to have_received(:map_order).with(api_buy_response)
     end
 
     it 'wraps exceptions in its own class' do
       net.stub(:post).and_raise(StandardError)
-      expect{ subject.buy!(BigDecimal('100'), BigDecimal('1')) }.to raise_error(Bitstampede::StandardError)
+      expect{ client.buy!(BigDecimal('100'), BigDecimal('1')) }.to raise_error(Bitstampede::StandardError)
     end
   end
 
@@ -84,7 +84,7 @@ describe Bitstampede::Client do
     before do
       net.stub(:post).and_return(api_sell_response)
       mapper.stub(:map_order).and_return(order_object)
-      subject.sell!(BigDecimal('100'), BigDecimal('1'))
+      client.sell!(BigDecimal('100'), BigDecimal('1'))
     end
 
     it 'submits a sell order to the API' do
@@ -97,7 +97,7 @@ describe Bitstampede::Client do
 
     it 'wraps exceptions in its own class' do
       net.stub(:post).and_raise(StandardError)
-      expect{ subject.sell!(BigDecimal('100'), BigDecimal('1')) }.to raise_error(Bitstampede::StandardError)
+      expect{ client.sell!(BigDecimal('100'), BigDecimal('1')) }.to raise_error(Bitstampede::StandardError)
     end
   end
 
@@ -107,7 +107,7 @@ describe Bitstampede::Client do
     before do
       net.stub(:post).and_return(api_cancel_response)
       mapper.stub(:map_cancel).and_return(true)
-      subject.cancel(1234)
+      client.cancel(1234)
     end
 
     it 'submits a cancel order to the API' do
@@ -120,7 +120,7 @@ describe Bitstampede::Client do
 
     it 'wraps exceptions in its own class' do
       net.stub(:post).and_raise(StandardError)
-      expect{ subject.cancel(123) }.to raise_error(Bitstampede::StandardError)
+      expect{ client.cancel(123) }.to raise_error(Bitstampede::StandardError)
     end
   end
 end
