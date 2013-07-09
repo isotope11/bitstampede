@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 module Bitstampede
   module Entities
     class Base

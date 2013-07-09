@@ -1,4 +1,4 @@
-require 'httparty'
+require 'net/http/persistent'
 
 module Bitstampede
   class Net
@@ -44,7 +44,11 @@ module Bitstampede
     end
 
     def raw_post(endpoint, options)
-      HTTParty.post(url_for(endpoint), body: options.merge(auth_options)).to_s.tap {|r| STDOUT.puts r}
+      uri = URI url_for(endpoint)
+      http = ::Net::HTTP::Persistent.new 'bitstampede'
+      post = ::Net::HTTP::Post.new uri.path
+      post.set_form_data options.merge(auth_options)
+      http.request(uri, post).body
     end
   end
 end
