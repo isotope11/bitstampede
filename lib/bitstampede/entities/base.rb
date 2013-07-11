@@ -45,8 +45,12 @@ module Bitstampede
       end
 
       def check_for_errors(hash)
-        if hash.keys.include?("error")
-          raise Bitstampede::StandardError.new(hash["error"]["__all__"].join(".  "))
+        if hash.has_key?("error")
+          if hash["error"].has_key?("__all__")
+            raise Bitstampede::StandardError.new(hash["error"]["__all__"].join(".  "))
+          else
+            raise Bitstampede::StandardError.new("Bitstamp API Error #404")
+          end
         end
       end
     end

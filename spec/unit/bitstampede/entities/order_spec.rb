@@ -35,17 +35,34 @@ describe Bitstampede::Entities::Order do
   end
 
   context "an unsuccessful order" do
-    let(:order_hash){
-      # Don't get mad at me, not my fault bitstamp errors look like this
-      {
-        "error" => {
-          "__all__" => ["Minimum order size is $1"]
+    context "with an __all__ key" do
+      let(:order_hash){
+        # Don't get mad at me, not my fault bitstamp errors look like this
+        {
+          "error" => {
+            "__all__" => ["Minimum order size is $1"]
+          }
         }
       }
-    }
 
-    it "raises an appropriate error" do
-      expect{ subject }.to raise_error(Bitstampede::StandardError, "Minimum order size is $1")
+      it "raises an appropriate error" do
+        expect{ subject }.to raise_error(Bitstampede::StandardError, "Minimum order size is $1")
+      end
+    end
+
+    context "without an __all__ key" do
+      let(:order_hash){
+        # Don't get mad at me, not my fault bitstamp errors look like this
+        {
+          "error" => {
+            "neg" => ["Minimum order size is $1"]
+          }
+        }
+      }
+
+      it "raises an appropriate error" do
+        expect{ subject }.to raise_error(Bitstampede::StandardError, "Bitstamp API Error #404")
+      end
     end
   end
 end
