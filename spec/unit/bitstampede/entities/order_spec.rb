@@ -64,5 +64,18 @@ describe Bitstampede::Entities::Order do
         expect{ subject }.to raise_error(Bitstampede::StandardError, "Bitstamp API Error #404")
       end
     end
+
+    context "with an error key" do
+      let(:order_hash){
+        # Don't get mad at me, not my fault bitstamp errors look like this
+        {
+          "error" => "Invalid username and/or password"
+        }
+      }
+
+      it "raises an appropriate error" do
+        expect{ subject }.to raise_error(Bitstampede::StandardError, "Invalid username and/or password")
+      end
+    end
   end
 end
