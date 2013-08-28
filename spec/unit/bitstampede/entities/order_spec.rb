@@ -65,9 +65,9 @@ describe Bitstampede::Entities::Order do
       end
     end
 
-    context "with an error key" do
+    context "given invalid BitStamp credentials" do
       let(:order_hash){
-        # Don't get mad at me, not my fault bitstamp errors look like this
+        # Don't get mad at me, not my fault bitstamp errors look like this, and are not in a consistant pattern
         {
           "error" => "Invalid username and/or password"
         }
