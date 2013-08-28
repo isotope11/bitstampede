@@ -46,6 +46,7 @@ module Bitstampede
 
       def check_for_errors(hash)
         if hash.has_key?("error")
+          raise Bitstampede::StandardError.new(hash["error"]) if hash["error"].is_a?(String)
           if hash["error"].has_key?("__all__")
             raise Bitstampede::StandardError.new(hash["error"]["__all__"].join(".  "))
           else
