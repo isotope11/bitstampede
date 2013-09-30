@@ -6,10 +6,10 @@ module Bitstampede
   class Client
     attr_accessor :key, :secret, :client_id
 
-    def initialize(key = nil, secret = nil, client_id = nil)
-      @key       = key
-      @secret    = secret
-      @client_id = client_id
+    def initialize(options = {})
+      @key       = options[:key]
+      @secret    = options[:secret]
+      @client_id = options[:client_id]
     end
 
     def balance

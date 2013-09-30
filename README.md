@@ -38,7 +38,7 @@ client.secret = 'YOUR_API_SECRET'
 client.client_id = 'YOUR_CLIENT_ID'
 
 # Alternatively, you can configure the client on initialization with:
-client = Bitstampede::Client.new('YOUR_API_KEY', 'YOUR_API_SECRET', 'YOUR_CLIENT_ID')
+client = Bitstampede::Client.new(key: 'YOUR_API_KEY', secret: 'YOUR_API_SECRET', client_id: 'YOUR_CLIENT_ID')
 
 # Fetch your balance
 client.balance
