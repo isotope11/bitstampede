@@ -4,12 +4,12 @@ require 'bigdecimal/util'
 
 module Bitstampede
   class Client
-    attr_accessor :key
-    attr_accessor :secret
+    attr_accessor :key, :secret, :client_id
 
-    def initialize(key = nil, secret = nil)
-      @key    = key
-      @secret = secret
+    def initialize(key = nil, secret = nil, client_id = nil)
+      @key       = key
+      @secret    = secret
+      @client_id = client_id
     end
 
     def balance
