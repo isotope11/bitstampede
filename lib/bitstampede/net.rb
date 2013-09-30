@@ -1,4 +1,5 @@
 require 'net/http/persistent'
+require_relative '../bitstampede/nonce_generator'
 
 module Bitstampede
   class Net
@@ -8,16 +9,16 @@ module Bitstampede
       @client = client
     end
 
-    def secret
-      client.secret
+    def post(endpoint, options={})
+      map_response(raw_post(endpoint, options))
     end
 
     def key
       client.key
     end
 
-    def post(endpoint, options={})
-      map_response(raw_post(endpoint, options))
+    def secret
+      client.secret
     end
 
     private
@@ -25,15 +26,30 @@ module Bitstampede
       base_url + endpoint + '/'
     end
 
+    def nonce
+      @nonce ||= NonceGenerator.new.generate
+    end
+
     def base_url
       'https://www.bitstamp.net/api/'
     end
 
+    def client_id
+      client.client_id
+    end
+
     def auth_options
       {
-        user: key,
-        password: secret
+        key: key,
+        nonce: nonce,
+        signature: signature
       }
+    end
+
+    def signature
+      params = "#{nonce}#{client_id}#{key}"
+      hmac = OpenSSL::HMAC.new(secret, OpenSSL::Digest::SHA256.new)
+      hmac.update(params).hexdigest.upcase
     end
 
     # For some crazy reason, bitstamp is returning ruby hash strings rather than
@@ -48,6 +64,7 @@ module Bitstampede
       http = ::Net::HTTP::Persistent.new 'bitstampede'
       post = ::Net::HTTP::Post.new uri.path
       post.set_form_data options.merge(auth_options)
+      @nonce = nil
       http.request(uri, post).body
     end
   end
