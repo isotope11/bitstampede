@@ -33,12 +33,12 @@ Third, this stuff:
 ```ruby
 client = Bitstampede::Client.new
 
-# I am sad for the following, but such is Bitstamp at present :-\
-client.key = 'YOUR_USER_ID'
-client.secret = 'YOUR_PASSWORD'
+client.key = 'YOUR_API_KEY
+client.secret = 'YOUR_API_SECRET'
+client.client_id = 'YOUR_CLIENT_ID'
 
 # Alternatively, you can configure the client on initialization with:
-client = Bitstampede::Client.new('YOUR_USER_ID', 'YOUR_PASSWORD')
+client = Bitstampede::Client.new(key: 'YOUR_API_KEY', secret: 'YOUR_API_SECRET', client_id: 'YOUR_CLIENT_ID')
 
 # Fetch your balance
 client.balance

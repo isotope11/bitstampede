@@ -16,7 +16,7 @@ describe Bitstampede::Client do
     end
 
     it 'allows specifying key/secret on initialize' do
-      client = described_class.new('KEY', 'SECRET')
+      client = described_class.new(key: 'KEY', secret: 'SECRET', client_id: "client-id")
 
       expect(client.key).to eql('KEY')
       expect(client.secret).to eql('SECRET')
