@@ -19,7 +19,7 @@ module Bitstampede
     end
 
     def map_cancel(result)
-      parsed(result) == 'true'
+      result == 'true'
     end
 
     private
