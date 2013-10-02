@@ -37,8 +37,8 @@ describe Bitstampede::Mapper do
 
   describe '#map_cancel' do
     it "maps a cancel API response to a boolean" do
-      expect(mapper.map_cancel('"true"')).to eq(true)
-      expect(mapper.map_cancel('"false"')).to eq(false)
+      expect(mapper.map_cancel('true')).to eq(true)
+      expect(mapper.map_cancel('false')).to eq(false)
     end
   end
 end

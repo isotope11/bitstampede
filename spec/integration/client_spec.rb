@@ -93,9 +93,7 @@ describe "Integrating a client" do
   end
 
   it "handles #cancel" do
-    example_cancel_response = <<-JSON
-      "true"
-    JSON
+    example_cancel_response = 'true'
 
     FakeWeb.register_uri(:post, "https://www.bitstamp.net/api/cancel_order/", body: example_cancel_response)
 
