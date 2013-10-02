@@ -85,3 +85,5 @@ These people have contributed to the gem.  Many thanks!:
 
 - Josh Adams
 - [Robert Jackson](https://github.com/rjackson)
+- [Seth Messer](https://github.com/megalithic)
+- [James Cook](https://github.com/jamescook)
