@@ -33,7 +33,7 @@ Third, this stuff:
 ```ruby
 client = Bitstampede::Client.new
 
-client.key = 'YOUR_API_KEY
+client.key = 'YOUR_API_KEY'
 client.secret = 'YOUR_API_SECRET'
 client.client_id = 'YOUR_CLIENT_ID'
 
