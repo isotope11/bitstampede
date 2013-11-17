@@ -7,16 +7,17 @@ class Example
     client = Bitstampede::Client.new
     client.key = key
     client.secret = secret
+    client.client_id = clientid
     output block.call(client)
   end
 
   private
   def validate_env_vars
-    print_env_var_message if missing_either_var?
+    print_env_var_message if missing_env_var?
   end
 
-  def missing_either_var?
-    key.nil? || secret.nil?
+  def missing_env_var?
+    key.nil? || secret.nil? || clientid.nil?
   end
 
   def key
@@ -27,15 +28,17 @@ class Example
     ENV["BITSTAMP_SECRET"]
   end
 
+  def clientid
+    ENV["BITSTAMP_CLIENTID"]
+  end
+
   def print_env_var_message
     output <<-MSG
-      These examples assume that you have two env vars defined:
+      These examples assume that you have three env vars defined:
 
-      BITSTAMP_KEY (which would be your user id)
-
-      and
-
-      BITSTAMP_SECRET (which would be your password)
+      BITSTAMP_KEY
+      BITSTAMP_SECRET
+      BITSTAMP_CLIENTID
 
       You don't appear to.  Rectify that, mnkay?
     MSG
