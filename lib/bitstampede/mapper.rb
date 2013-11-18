@@ -1,5 +1,6 @@
 require_relative './entities/balance'
 require_relative './entities/order'
+require_relative './entities/transaction'
 
 module Bitstampede
   class Mapper
@@ -8,6 +9,14 @@ module Bitstampede
 
     def map_balance(json)
       Entities::Balance.new(parsed(json))
+    end
+
+    def map_transactions(json)
+      parsed(json).map{|t| map_transaction(t) }
+    end
+
+    def map_transaction(transaction)
+      Entities::Transaction.new(transaction)
     end
 
     def map_orders(json)

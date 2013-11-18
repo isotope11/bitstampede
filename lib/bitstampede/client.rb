@@ -16,6 +16,16 @@ module Bitstampede
       mapper.map_balance(net.post("balance"))
     end
 
+    #   # See https://www.bitstamp.net/api/
+    #   opts = {
+    #     offset: 3,
+    #     limit:  200,
+    #     sort:   "asc"
+    #   }
+    def transactions(opts={})
+      mapper.map_transactions(net.post("user_transactions",opts))
+    end
+
     def orders
       mapper.map_orders(net.post("open_orders"))
     end
