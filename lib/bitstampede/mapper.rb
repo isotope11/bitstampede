@@ -15,7 +15,7 @@ module Bitstampede
     end
 
     def map_order(order)
-      Entities::Order.new(parsed(order))
+      Entities::Order.new(order)
     end
 
     def map_cancel(result)
