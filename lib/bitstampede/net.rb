@@ -64,7 +64,7 @@ module Bitstampede
       http = ::Net::HTTP::Persistent.new 'bitstampede'
       post = ::Net::HTTP::Post.new uri.path
       post.set_form_data options.merge(auth_options)
-      @nonce = nil
+      @nonce = nil      # avoid reusing the last nonce
       http.request(uri, post).body
     end
   end
