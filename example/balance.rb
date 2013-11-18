@@ -1,10 +1,6 @@
+require "awesome_print"
 require_relative './example'
 
 Example.new do |client|
-  bal = client.balance
-  "".tap do |output|
-    bal.class.mappings.keys.each do |key|
-      output << "#{key}: #{bal.send(key).to_digits}\n"
-    end
-  end
+  ap client.balance
 end
