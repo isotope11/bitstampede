@@ -3,7 +3,7 @@ require_relative './base'
 module Bitstampede
   module Entities
     class Order < Base
-      class InvalidTypeError < StandardError; end
+      class InvalidTypeError < Bitstampede::StandardError; end
 
       def self.map_type
         ->(val) do

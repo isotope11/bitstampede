@@ -1,3 +1,4 @@
+require_relative 'standarderror'
 require_relative 'net'
 require_relative 'mapper'
 require 'bigdecimal/util'
@@ -13,7 +14,7 @@ module Bitstampede
     end
 
     def balance
-      mapper.map_balance(net.post("balance"))
+      mapper.map_balance(net.post_assure_json("balance"))
     end
 
     #   # See https://www.bitstamp.net/api/
@@ -23,11 +24,11 @@ module Bitstampede
     #     sort:   "asc"
     #   }
     def transactions(opts={})
-      mapper.map_transactions(net.post("user_transactions",opts))
+      mapper.map_transactions(net.post_assure_json("user_transactions",opts))
     end
 
     def orders
-      mapper.map_orders(net.post("open_orders"))
+      mapper.map_orders(net.post_assure_json("open_orders"))
     end
 
     def buy!(amount, price)
@@ -40,7 +41,7 @@ module Bitstampede
 
     def cancel(id)
       wrapping_standard_error do
-        mapper.map_cancel(net.post("cancel_order", { id: id.to_s }))
+        mapper.map_cancel(net.post_assure_json("cancel_order", { id: id.to_s }))
       end
     end
 
@@ -55,7 +56,7 @@ module Bitstampede
 
     def trade!(type, amount, price)
       wrapping_standard_error do
-        mapper.map_order(net.post(type, { price: price.to_digits, amount: amount.to_digits }))
+        mapper.map_order(net.post_assure_json(type, { price: price.to_digits, amount: amount.to_digits }))
       end
     end
 
