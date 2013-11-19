@@ -1,0 +1,297 @@
+API
+What Is API?
+
+Bitstamp application programming interface (API) allows our clients to access and control their accounts, using custom written software.
+Request limits
+
+Do not make more than 600 request per 10 minutes or we will ban your IP address.
+Public Data Functions
+Ticker
+
+GET https://www.bitstamp.net/api/ticker/
+
+Returns JSON dictionary:
+
+    last - last BTC price
+    high - last 24 hours price high
+    low - last 24 hours price low
+    volume - last 24 hours volume
+    bid - highest buy order
+    ask - lowest sell order
+
+Order book
+
+GET https://www.bitstamp.net/api/order_book/
+
+Params:
+
+    group - group orders with the same price (0 - false; 1 - true). Default: 1.
+
+Returns JSON dictionary with "bids" and "asks". Each is a list of open orders and each order is represented as a list of price and amount.
+Transactions
+
+GET https://www.bitstamp.net/api/transactions/
+
+Params:
+
+    time - time frame for transaction export ("minute" - 1 minute, "hour" - 1 hour). Default: hour.
+
+Returns descending JSON list of transactions. Every transaction (dictionary) contains:
+
+    date - unix timestamp date and time
+    tid - transaction id
+    price - BTC price
+    amount - BTC amount
+
+EUR/USD conversion rate
+
+GET https://www.bitstamp.net/api/eur_usd/
+
+Returns JSON dictionary:
+
+    buy - buy conversion rate
+    sell - sell conversion rate
+
+API authentication
+
+All private API calls require authentication. You need to provide 3 parameters to authenticate a request:
+
+    API key
+    Nonce
+    Signature
+
+API key
+
+To get an API key, go to "Account", "Security" and then "API Access". Set permissions and click "Generate key".
+Nonce
+
+Nonce is a regular integer number. It must be increasing with every request you make. Read more about it here. Example: if you set nonce to 1 in your first request, you must set it to at least 2 in your second request. You are not required to start with 1. A common practice is to use unix time for that parameter.
+Signature
+
+Signature is a HMAC-SHA256 encoded message containing: nonce, client ID and API key. The HMAC-SHA256 code must be generated using a secret key that was generated with your API key. This code must be converted to it's hexadecimal representation (64 uppercase characters).
+
+Example (Python):
+message = nonce + client_id + api_key
+signature = hmac.new(API_SECRET, msg=message, digestmod=hashlib.sha256).hexdigest().upper()
+Private Functions
+Account balance
+
+POST https://www.bitstamp.net/api/balance/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+
+Returns JSON dictionary:
+
+    usd_balance - USD balance
+    btc_balance - BTC balance
+    usd_reserved - USD reserved in open orders
+    btc_reserved - BTC reserved in open orders
+    usd_available- USD available for trading
+    btc_available - BTC available for trading
+    fee - customer trading fee
+
+User transactions
+
+POST https://www.bitstamp.net/api/user_transactions/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+    offset - skip that many transactions before beginning to return results. Default: 0.
+    limit - limit result to that many transactions. Default: 100.
+    sort - sorting by date and time (asc - ascending; desc - descending). Default: desc.
+
+Returns descending JSON list of transactions. Every transaction (dictionary) contains:
+
+    datetime - date and time
+    id - transaction id
+    type - transaction type (0 - deposit; 1 - withdrawal; 2 - market trade)
+    usd - USD amount
+    btc - BTC amount
+    fee - transaction fee
+    oder_id - executed order id
+
+Open orders
+
+POST https://www.bitstamp.net/api/open_orders/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+
+Returns JSON list of open orders. Each order is represented as dictionary:
+
+    id - order id
+    datetime - date and time
+    type - buy or sell (0 - buy; 1 - sell)
+    price - price
+    amount - amount
+
+Cancel order
+
+POST https://www.bitstamp.net/api/cancel_order/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+    id - order ID
+
+Returns 'true' if order has been found and canceled.
+Buy limit order
+
+POST https://www.bitstamp.net/api/buy/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+    amount - amount
+    price - price
+
+Returns JSON dictionary representing order:
+
+    id - order id
+    datetime - date and time
+    type - buy or sell (0 - buy; 1 - sell)
+    price - price
+    amount - amount
+
+Sell limit order
+
+POST https://www.bitstamp.net/api/sell/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+    amount - amount
+    price - price
+
+Returns JSON dictionary representing order:
+
+    id - order id
+    datetime - date and time
+    type - buy or sell (0 - buy; 1 - sell)
+    price - price
+    amount - amount
+
+Check Bitstamp code
+
+POST https://www.bitstamp.net/api/check_code/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+    code - Bitstamp code to check
+
+Returns JSON dictionary containing USD and BTC amount included in given bitstamp code.
+Redeem Bitstamp code
+
+POST https://www.bitstamp.net/api/redeem_code/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+    code - Bitstamp code to redeem
+
+Returns JSON dictionary containing USD and BTC amount added to user's account.
+Withdrawal requests
+
+POST https://www.bitstamp.net/api/withdrawal_requests/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+
+Returns JSON list of withdrawal requests. Each request is represented as dictionary:
+
+    id - order id
+    datetime - date and time
+    type - (0 - SEPA; 1 - bitcoin; 2 - WIRE transfer; 3 and 4 - bitstamp code; 5 - Mt.Gox code)
+    amount - amount
+    status - (0 - open; 1 - in process; 2 - finished; 3 - canceled; 4 - failed)
+    data - additional withdrawal request data (Mt.Gox code, etc.)
+
+Bitcoin withdrawal
+
+POST https://www.bitstamp.net/api/bitcoin_withdrawal/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+    amount - bitcoin amount
+    address - bitcoin address
+
+Returns true if successful.
+Bitcoin deposit address
+
+POST https://www.bitstamp.net/api/bitcoin_deposit_address/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+
+Returns your bitcoin deposit address.
+Unconfirmed bitcoin deposits
+
+POST https://www.bitstamp.net/api/unconfirmed_btc/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+
+Returns JSON list of unconfirmed bitcoin transactions. Each transaction is represented as dictionary:
+
+    amount - bitcoin amount
+    address - deposit address used
+    confirmations - number of confirmations
+
+Ripple withdrawal
+
+POST https://www.bitstamp.net/api/ripple_withdrawal/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+    amount - currency amount
+    address - bitcoin address
+    currency - currency
+
+Returns true if successful.
+Ripple deposit address
+
+POST https://www.bitstamp.net/api/ripple_address/
+
+Params:
+
+    key - API key
+    signature - signature
+    nonce - nonce
+
+Returns your ripple deposit address.
