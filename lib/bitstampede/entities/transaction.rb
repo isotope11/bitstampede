@@ -3,8 +3,6 @@ require_relative './base'
 module Bitstampede
   module Entities
     class Transaction < Base
-      class InvalidTypeError < StandardError; end
-
       def self.map_type
         ->(val) do
           case val.to_s
@@ -12,7 +10,7 @@ module Bitstampede
           when '1' then :withdrawal
           when '2' then :markettrade
           else
-            raise InvalidTypeError
+            raise Bitstampede::StandardError.new("Received invalid type: val='#{val.inspect}'. Aborting")
           end
         end
       end
