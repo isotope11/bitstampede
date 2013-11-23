@@ -45,6 +45,10 @@ module Bitstampede
         ->(val) { Time.parse(val) }
       end
 
+      def self.map_unix_time
+        ->(val) { Time.at(val.to_i) }
+      end
+
       def self.map_int
         ->(val) { val.to_i }
       end

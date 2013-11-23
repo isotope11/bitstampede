@@ -2,6 +2,8 @@ require_relative './entities/UserBalance'
 require_relative './entities/UserOrder'
 require_relative './entities/UserTransaction'
 require_relative './entities/Ticker'
+require_relative './entities/HouseOrderBook'
+require_relative './entities/ShallowOrder'
 
 module Bitstampede
   class Mapper
@@ -12,8 +14,8 @@ module Bitstampede
       Entities::Ticker.new(ticker_json)
     end
 
-    def map_general_order_book(gob_json)
-      # gob_json = 
+    def map_house_order_book(hob_json)
+      # hob_json = 
       # {"timestamp"=>    "1384916421",
       #  "bids"=>         [
       #                     ["555.57", "1.06213324"],
@@ -27,31 +29,7 @@ module Bitstampede
       #                   ]
       # }
       #
-
-      # TODO: finish this...
-      # basically:
-      #   class Entities::GeneralOrderBook
-      #       def self.mappings
-      #         { timestamp:  map_time,
-      #           bids:       map_orderbook_entries
-      #           asks:       map_orderbook_entries
-      #         }
-      #       end
-      #
-      #       def map_orderbook_entries
-      #         >-(val) do 
-      #           # val = [
-      #           #         ["555.57", "1.06213324"],
-      #           #         ["555.55", "22.56364904"],
-      #           #         ...
-      #           #       ]
-      #           val.map { ... }
-      #         end
-      #         
-      #       end
-      binding.pry
-      ap gob_json
-      gob_json.map{|o| map_order(o) }
+      Entities::HouseOrderBook.new(hob_json)
     end
 
     def map_user_balance(user_balance_json)

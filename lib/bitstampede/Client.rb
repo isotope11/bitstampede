@@ -1,7 +1,8 @@
 require_relative 'StandardError'
 require_relative 'Net'
 require_relative 'Mapper'
-require 'bigdecimal/util'
+require_relative "./BigDecimal"
+#require 'bigdecimal/util'
 require_relative './BitstampPublicApi'
 require_relative './BitstampPrivateApi'
 
