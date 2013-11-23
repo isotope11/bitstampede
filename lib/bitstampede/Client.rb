@@ -1,6 +1,6 @@
 require_relative 'standarderror'
 require_relative 'net'
-require_relative 'mapper'
+require_relative 'Mapper'
 require 'bigdecimal/util'
 require_relative './BitstampPublicApi'
 require_relative './BitstampPrivateApi'
