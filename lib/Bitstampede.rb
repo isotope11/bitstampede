@@ -1,5 +1,5 @@
 require_relative './bitstampede/version'
-require_relative './bitstampede/client'
+require_relative './bitstampede/Client'
 
 
 

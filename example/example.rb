@@ -1,4 +1,4 @@
-require_relative '../lib/bitstampede'
+require_relative '../lib/Bitstampede'
 require 'pry'
 
 class Example
