@@ -2,7 +2,7 @@ require_relative './base'
 
 module Bitstampede
   module Entities
-    class Balance < Base
+    class UserBalance < Base
       def self.mappings
         {
           usd_balance: map_decimal,

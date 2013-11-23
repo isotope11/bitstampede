@@ -1,8 +1,9 @@
 module Bitstampede
   module BitstampPrivateApi
-    def balance
-      mapper.map_balance(net.make_request_and_expect_json(:POST,"balance"))
+    def user_balance
+      mapper.map_user_balance(net.make_request_and_expect_json(:POST,"balance"))
     end
+    alias_method :balance, :user_balance
 
     #   # See https://www.bitstamp.net/api/
     #   opts = {

@@ -1,4 +1,4 @@
-require_relative './entities/balance'
+require_relative './entities/UserBalance'
 require_relative './entities/order'
 require_relative './entities/transaction'
 require_relative './entities/ticker'
@@ -54,8 +54,8 @@ module Bitstampede
       gob_json.map{|o| map_order(o) }
     end
 
-    def map_balance(balance_json)
-      Entities::Balance.new(balance_json)
+    def map_user_balance(user_balance_json)
+      Entities::UserBalance.new(user_balance_json)
     end
 
     def map_transactions(transactions_json)
