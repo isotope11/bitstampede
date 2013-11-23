@@ -16,9 +16,10 @@ module Bitstampede
     end
     alias_method :transactions, :user_transactions
 
-    def orders
-      mapper.map_orders(net.make_request_and_expect_json(:POST,"open_orders"))
+    def user_orders
+      mapper.map_user_orders(net.make_request_and_expect_json(:POST,"open_orders"))
     end
+    alias_method :orders, :user_orders
 
     def buy!(amount, price)
       trade!("buy", amount, price)
@@ -38,7 +39,7 @@ module Bitstampede
 
     def trade!(type, amount, price)
       wrapping_standard_error do
-        mapper.map_order(net.make_request_and_expect_json(:POST,type, { price: price.to_digits, amount: amount.to_digits }))
+        mapper.map_user_order(net.make_request_and_expect_json(:POST,type, { price: price.to_digits, amount: amount.to_digits }))
       end
     end
 

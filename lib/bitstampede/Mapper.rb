@@ -1,5 +1,5 @@
 require_relative './entities/UserBalance'
-require_relative './entities/Order'
+require_relative './entities/UserOrder'
 require_relative './entities/UserTransaction'
 require_relative './entities/Ticker'
 
@@ -66,12 +66,12 @@ module Bitstampede
       Entities::UserTransaction.new(user_transaction_json)
     end
 
-    def map_orders(orders_json)
-      orders_json.map{|o| map_order(o) }
+    def map_user_orders(user_orders_json)
+      user_orders_json.map{|o| map_user_order(o) }
     end
 
-    def map_order(order_json)
-      Entities::Order.new(order_json)
+    def map_user_order(user_order_json)
+      Entities::UserOrder.new(user_order_json)
     end
 
     def map_cancel(result)
