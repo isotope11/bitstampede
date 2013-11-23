@@ -1,5 +1,5 @@
 require 'net/http/persistent'
-require_relative '../bitstampede/nonce_generator'
+require_relative '../bitstampede/NonceGenerator'
 require 'multi_json'
 require 'json'
 
