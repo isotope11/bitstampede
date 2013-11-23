@@ -25,9 +25,9 @@ module Bitstampede
     # User transactions executed in the past
     #
     # @param opts [Hash] opts - see https://www.bitstamp.net/api/
-    # @option [Fixnum] :offset  ex: 3
-    # @option [Fixnum] :limit   ex: 200
-    # @option [String] :sort    ex: "asc"
+    # @option opts [Fixnum] :offset  ex: 3
+    # @option opts [Fixnum] :limit   ex: 200
+    # @option opts [String] :sort    ex: "asc"
     #
     #
     # @return {Array<Entities::UserTransaction} 
@@ -69,6 +69,11 @@ module Bitstampede
     #     client.user_transactions[0].datetime          # 0 is the most recent, -1 is the oldest
     #
     def user_transactions(opts={})
+      # opts can have any of these keys:
+      # opts = { offset: 3,
+      #           limit: 200,
+      #            sort: "asc"
+      #        }
       mapper.map_user_transactions(net.make_request_and_expect_json(:POST,"user_transactions",opts))
     end
     alias_method :transactions, :user_transactions
@@ -97,7 +102,7 @@ module Bitstampede
 
     # Cancel an existing order (buy-limit or sell-limit), with *order_id*
     #
-    # @return true or false
+    # @return [TrueClass, FalseClass] true or false
     def cancel!(order_id)
       wrapping_standard_error do
         mapper.map_cancel(net.make_request_and_expect_json(:POST,"cancel_order", { order_id: order_id.to_s }))
