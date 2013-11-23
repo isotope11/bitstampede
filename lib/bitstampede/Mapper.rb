@@ -4,6 +4,7 @@ require_relative './entities/UserTransaction'
 require_relative './entities/Ticker'
 require_relative './entities/HouseOrderBook'
 require_relative './entities/ShallowOrder'
+require_relative './entities/ShallowTransaction'
 
 module Bitstampede
   class Mapper
@@ -31,6 +32,30 @@ module Bitstampede
       #
       Entities::HouseOrderBook.new(hob_json)
     end
+
+    def map_house_transactions(hts_json)
+      # hts_json = 
+      # [{"date"=>"1385175941",
+      #  "tid"=>2052522,
+      #  "price"=>"810.80",
+      #  "amount"=>"1.63100000"},
+      #  ...
+      # {"date"=>"1385172381",
+      #  "tid"=>2051853,
+      #  "price"=>"803.09",
+      #  "amount"=>"1.00110822"}]
+      hts_json.map {|ht| map_house_transaction(ht)}
+    end
+
+    def map_house_transaction(ht_json)
+      # ht_json = 
+      #  {"date"=>"1385175941",
+      #  "tid"=>2052522,
+      #  "price"=>"810.80",
+      #  "amount"=>"1.63100000"}
+      Entities::ShallowTransaction.new(ht_json)
+    end
+
 
     def map_user_balance(user_balance_json)
       Entities::UserBalance.new(user_balance_json)
