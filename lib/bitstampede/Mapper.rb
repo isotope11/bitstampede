@@ -1,5 +1,5 @@
 require_relative './entities/UserBalance'
-require_relative './entities/order'
+require_relative './entities/Order'
 require_relative './entities/transaction'
 require_relative './entities/ticker'
 
