@@ -43,7 +43,6 @@ module Bitstampede
     #     #  btc: 0.15013755
     #     #  fee: 0.36
     #     #  order_id: 9633016
-    #     #>
     #     #,
     #     #    [1] #<Bitstampede::Entities::UserTransaction:77165740
     #     #  datetime: 2013-11-21 08:31:31 +0100
@@ -53,7 +52,7 @@ module Bitstampede
     #     #  btc: -0.0031541
     #     #  fee: 0.01
     #     #  order_id: 9646664
-    #     #>
+    #     #,
     #     #...
     #     #,
     #     #    [9] #<Bitstampede::Entities::UserTransaction:77207200
@@ -80,7 +79,27 @@ module Bitstampede
 
     # User orders (limit-buy or sell) currently open and ready to be executed
     #
+    # @example
+    #   client.user_orders
+    #     # [
+    #     #     [0] #<Bitstampede::Entities::UserOrder:84417590
+    #     #   id: 9756960
+    #     #   datetime: 2013-11-23 20:21:25 +0100
+    #     #   type: :buy
+    #     #   price: 100.0
+    #     #   amount: 0.5
+    #     # ,
+    #     #     [1] #<Bitstampede::Entities::UserOrder:84416650
+    #     #   id: 9756618
+    #     #   datetime: 2013-11-23 20:11:43 +0100
+    #     #   type: :buy
+    #     #   price: 200.0
+    #     #   amount: 1.0
+    #     # ]
+    #   client.user_orders[0].datetime    # 0 is the newest order, -1 is the oldest
+    #
     # @return [Array<Entities::UserOrder>]
+    #
     def user_orders
       mapper.map_user_orders(net.make_request_and_expect_json(:POST,"open_orders"))
     end

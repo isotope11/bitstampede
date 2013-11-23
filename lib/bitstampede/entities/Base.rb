@@ -69,7 +69,7 @@ module Bitstampede
         self.class.mappings.each_pair do |key,map_method|
           inspect_string << ("  #{key}: " + eval("@#{key}.ai") + "\n")
         end
-        inspect_string << ">\n"
+        inspect_string << "\n"
         inspect_string
       end
 
