@@ -12,6 +12,10 @@ module Bitstampede
     include ::Bitstampede::BitstampPrivateApi
     attr_accessor :key, :secret, :client_id
 
+    # @param [Hash] options
+    # @option options [String] :key 
+    # @option options [String] :secret 
+    # @option options [String] :client_id 
     def initialize(options = {})
       @key       = options[:key]
       @secret    = options[:secret]
