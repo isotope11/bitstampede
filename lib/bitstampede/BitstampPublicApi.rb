@@ -5,7 +5,7 @@ module Bitstampede
       mapper.map_ticker(net.make_request_and_expect_json(:GET, "ticker")) 
     end
 
-    # @returns {Entities::HouseOrderBook} the order-book with all current open orders, from all Bitstamp users
+    # @return {Entities::HouseOrderBook} the order-book with all current open orders, from all Bitstamp users
     #    hob = client.house_order_book
     #    hob.asks[0].usd        # 0 is the highest
     #    hob.asks[0].btc
@@ -18,7 +18,7 @@ module Bitstampede
 
     # List of last transactions executed in exchange
     #
-    # @returns [Array<Entities::ShallowTransaction>] 
+    # @return [Array<Entities::ShallowTransaction>] 
     #   hts = client.house_transactions
     #   hts[0].date             # 0 is the most recent transaction
     #   hts[0].tid
