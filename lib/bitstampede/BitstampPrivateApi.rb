@@ -11,9 +11,10 @@ module Bitstampede
     #     limit:  200,
     #     sort:   "asc"
     #   }
-    def transactions(opts={})
-      mapper.map_transactions(net.make_request_and_expect_json(:POST,"user_transactions",opts))
+    def user_transactions(opts={})
+      mapper.map_user_transactions(net.make_request_and_expect_json(:POST,"user_transactions",opts))
     end
+    alias_method :transactions, :user_transactions
 
     def orders
       mapper.map_orders(net.make_request_and_expect_json(:POST,"open_orders"))

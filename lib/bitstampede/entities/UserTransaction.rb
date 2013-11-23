@@ -2,7 +2,7 @@ require_relative './Base'
 
 module Bitstampede
   module Entities
-    class Transaction < Base
+    class UserTransaction < Base
       def self.map_type
         ->(val) do
           case val.to_s
