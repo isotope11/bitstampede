@@ -20,6 +20,9 @@ module Bitstampede
 
     # List of last transactions executed in exchange
     #
+    # @param [Hash] opts - see https://www.bitstamp.net/api/
+    # @option opts [String] :time "hour" for 1 hour (default), or "minute" for 1 minute
+    #
     # @return [Array<Entities::ShallowTransaction>] 
     #
     # @example
@@ -29,8 +32,8 @@ module Bitstampede
     #   hts[0].price            # usd
     #   hts[0].amount           # btc
     #
-    def house_transactions
-      mapper.map_house_transactions(net.make_request_and_expect_json(:GET, "transactions")) 
+    def house_transactions(opts={time: "hour"})
+      mapper.map_house_transactions(net.make_request_and_expect_json(:GET, "transactions",opts)) 
     end
 
   end

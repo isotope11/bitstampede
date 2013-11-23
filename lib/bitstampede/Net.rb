@@ -17,7 +17,7 @@ module Bitstampede
     #
     # @param [Symbol] request_type :POST or :GET - see #raw_request
     # @param [Symbol] endpoint - see #raw_request 
-    # @param [Hash] options - see #raw_request 
+    # @param [Hash] options - see {#raw_request}
     #
     # @raise [Bitstampede::StandardError] 
     # @return [Object] ruby object of JSON response parsed
@@ -87,7 +87,11 @@ module Bitstampede
         @nonce = nil      # avoid reusing the last nonce
         @http.request(uri, post).body
       when :GET
+        # get = Net::HTTP::Get.new uri.request_uri
+        # response = http.request get
+        uri.query = URI.encode_www_form( options ) 
         @http.request(uri).body
+        #binding.pry
       else
         raise Bitstampede::StandardError.new("Dont know request_type='#{request_type}'")
       end
