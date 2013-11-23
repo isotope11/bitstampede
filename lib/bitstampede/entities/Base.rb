@@ -8,7 +8,7 @@ module Bitstampede
     # 
     # This class is a template that should be used only to subclass new Entities, like:
     #
-    #   require_relative './base'
+    #   require_relative './Base'
     #   module Bitstampede; module Entities;
     #     class MyNewEntity < Base
     #       def self.mappings
