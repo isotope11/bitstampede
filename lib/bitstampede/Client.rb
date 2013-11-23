@@ -1,4 +1,4 @@
-require_relative 'standarderror'
+require_relative 'StandardError'
 require_relative 'Net'
 require_relative 'Mapper'
 require 'bigdecimal/util'
