@@ -22,7 +22,7 @@ Or install it yourself as:
 
 First, look at this picture:
 
-![Legitimate Concern](./doc/legitimate_concern.png)
+![Legitimate Concern](./old_crazy_docs/legitimate_concern.png)
 
 Second, stop writing api clients that are configured with class ivars ಠ_ಠ
 
@@ -87,3 +87,4 @@ These people have contributed to the gem.  Many thanks!:
 - [Robert Jackson](https://github.com/rjackson)
 - [Seth Messer](https://github.com/megalithic)
 - [James Cook](https://github.com/jamescook)
+- [Paulo Aleixo, zipizap](https://github.com/zipizap)

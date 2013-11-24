@@ -27,4 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", '2.14.1'
   spec.add_development_dependency "fakeweb"
   spec.add_development_dependency "pry"
+  spec.add_development_dependency "yard"
+  spec.add_development_dependency "awesome_print"
+  spec.add_development_dependency "terminal-table", "~> 1.4.5"
 end

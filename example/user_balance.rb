@@ -1,5 +1,6 @@
+require "awesome_print"
 require_relative './example'
 
 Example.new do |client|
-  client.orders
+  ap client.balance
 end

@@ -1,9 +1,9 @@
-require_relative './base'
+require_relative './Base'
 
 module Bitstampede
   module Entities
-    class Order < Base
-      class InvalidTypeError < StandardError; end
+    class UserOrder < Base
+      class InvalidTypeError < Bitstampede::StandardError; end
 
       def self.map_type
         ->(val) do
