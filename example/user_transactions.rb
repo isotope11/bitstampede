@@ -1,6 +1,7 @@
 require_relative './example'
 
 Example.new do |client|
-  ap client.transactions(limit:10).reverse
+  transactions = client.transactions(limit:30).reverse
+  Hlpr.show_dictionary_as_table(transactions,"Client Transactions")
 end
 
