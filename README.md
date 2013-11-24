@@ -87,3 +87,4 @@ These people have contributed to the gem.  Many thanks!:
 - [Robert Jackson](https://github.com/rjackson)
 - [Seth Messer](https://github.com/megalithic)
 - [James Cook](https://github.com/jamescook)
+- [Paulo Aleixo, zipizap](https://github.com/zipizap)
