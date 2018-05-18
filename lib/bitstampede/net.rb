@@ -61,7 +61,7 @@ module Bitstampede
 
     def raw_post(endpoint, options)
       uri = URI url_for(endpoint)
-      http = ::Net::HTTP::Persistent.new 'bitstampede'
+      http = ::Net::HTTP::Persistent.new(name: 'bitstampede')
       post = ::Net::HTTP::Post.new uri.path
       post.set_form_data options.merge(auth_options)
       @nonce = nil
